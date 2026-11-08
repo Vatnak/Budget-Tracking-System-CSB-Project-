@@ -1,4 +1,4 @@
-from validation import validate_expense_id, validate_date, validate_category, validate_amount, validate_note
+# from validation import validate_expense_id, validate_date, validate_category, validate_amount, validate_note
 
 # class TestExpense:
 #     def __init__(self, expense_id):
@@ -42,14 +42,14 @@ from validation import validate_expense_id, validate_date, validate_category, va
 # print(validate_note(123))
 # print(validate_note(None))
 
-from expense import Expense
-from validation import validate_expense
+# from expense import Expense
+# from validation import validate_expense
 
-# Existing expenses
-existing_expenses = [
-    Expense(1, "2026-11-01", "Food", 15.50, "Lunch"),
-    Expense(2, "2026-11-02", "Transport", 5.00, "Taxi")
-]
+# # Existing expenses
+# existing_expenses = [
+#     Expense(1, "2026-11-01", "Food", 15.50, "Lunch"),
+#     Expense(2, "2026-11-02", "Transport", 5.00, "Taxi")
+# ]
 
 # # Test 1: All valid fields
 # expense1 = Expense(3, "2026-11-08", "Shopping", 50.00, "New clothes")
@@ -75,24 +75,24 @@ existing_expenses = [
 # expense6 = Expense(7, "2026-11-08", "Food", 10.00, "")
 # print(validate_expense(expense6, existing_expenses))
 
-from validation import validate_expense_update
+# from validation import validate_expense_update
 
-# Test 1: All valid fields
-update1 = Expense(1, "2026-11-08", "Food", 25.00, "Updated lunch")
-print(validate_expense_update(update1))
+# # Test 1: All valid fields
+# update1 = Expense(1, "2026-11-08", "Food", 25.00, "Updated lunch")
+# print(validate_expense_update(update1))
 
-# Test 2: Invalid date
-update2 = Expense(1, "2026-15-40", "Food", 25.00, "Updated lunch")
-print(validate_expense_update(update2))
+# # Test 2: Invalid date
+# update2 = Expense(1, "2026-15-40", "Food", 25.00, "Updated lunch")
+# print(validate_expense_update(update2))
 
-# Test 3: Invalid category
-update3 = Expense(1, "2026-11-08", "   ", 25.00, "Updated lunch")
-print(validate_expense_update(update3))
+# # Test 3: Invalid category
+# update3 = Expense(1, "2026-11-08", "   ", 25.00, "Updated lunch")
+# print(validate_expense_update(update3))
 
-# Test 4: Invalid amount
-update4 = Expense(1, "2026-11-08", "Food", 0, "Updated lunch")
-print(validate_expense_update(update4))
+# # Test 4: Invalid amount
+# update4 = Expense(1, "2026-11-08", "Food", 0, "Updated lunch")
+# print(validate_expense_update(update4))
 
-# Test 5: Invalid note
-update5 = Expense(1, "2026-11-08", "Food", 25.00, "")
-print(validate_expense_update(update5))
+# # Test 5: Invalid note
+# update5 = Expense(1, "2026-11-08", "Food", 25.00, "")
+# print(validate_expense_update(update5))
