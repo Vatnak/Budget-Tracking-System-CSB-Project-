@@ -110,7 +110,7 @@ Budget-Tracking-System/
 
 ## 7. Installation and Setup
 
-### Prerequisites
+### Prerequisites  
 
 - Python 3 installed.
 - A terminal or command prompt.
