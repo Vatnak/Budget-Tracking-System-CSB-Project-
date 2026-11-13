@@ -52,7 +52,7 @@ def read_expense_id():
 
 
 def save_changes(manager, previous_expenses, filename):
-    if save_expenses(manager.expenses, filename):
+    if save_expenses(manager.view_expense(), filename):
         print("Changes saved successfully.")
     else:
         manager.expenses = previous_expenses
@@ -60,10 +60,7 @@ def save_changes(manager, previous_expenses, filename):
 
 
 def add_expense(manager, filename):
-    expense_id = 1
-    for expense in manager.expenses:
-        if expense.expense_id >= expense_id:
-            expense_id = expense.expense_id + 1
+    expense_id = max(manager.expenses, default=0) + 1
 
     date = input("Date (YYYY-MM-DD): ").strip()
     category = input("Category: ").strip()
@@ -93,7 +90,7 @@ def update_expense(manager, filename):
     if expense_id is None:
         return
 
-    if not any(expense.expense_id == expense_id for expense in manager.expenses):
+    if manager.get_expense(expense_id) is None:
         print("Expense ID not found.")
         return
 
@@ -114,7 +111,7 @@ def delete_expense(manager, filename):
     if expense_id is None:
         return
 
-    if not any(expense.expense_id == expense_id for expense in manager.expenses):
+    if manager.get_expense(expense_id) is None:
         print("Expense ID not found.")
         return
 

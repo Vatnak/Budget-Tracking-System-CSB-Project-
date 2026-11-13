@@ -11,10 +11,13 @@ def validate_expense_id(expense_id, expenses):
         if expense_id <= 0:
             print ("Invalid Expense ID: Expense ID must be greater than Zero.")
             return False
-        for expense in expenses:
-            if int(expense.expense_id) == expense_id:
-                print("This Expense ID already exists, try again.")
-                return False
+        if isinstance(expenses, dict):
+            duplicate = expense_id in expenses
+        else:
+            duplicate = any(int(expense.expense_id) == expense_id for expense in expenses)
+        if duplicate:
+            print("This Expense ID already exists, try again.")
+            return False
         return True
     except (ValueError, TypeError):
         print("Invalid Expense ID: Please enter a valid integer.")
