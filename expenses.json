@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "date": "2026-11-19",
+        "category": "Cloth",
+        "amount": 20.0,
+        "note": "New cloth"
+    },
+    {
+        "id": 2,
+        "date": "2026-12-23",
+        "category": "Movie",
+        "amount": 12.0,
+        "note": "Doomsday ticket"
+    }
+]

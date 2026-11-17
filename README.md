@@ -3,13 +3,13 @@
 **COSC221 – Final Project**  
 **American University of Phnom Penh (AUPP)**  
 **Programming Language:** Python  
-**Application Type:** Command-Line Interface (CLI)  
+**Application Type:** Streamlit web GUI and command-line interface (CLI)  
 **Data Storage:** JSON  
 **Team:** [Team Number]
 
 ## 1. Project Overview
 
-The Budget Tracking System is a Python command-line application designed to help users record, manage, and monitor their daily expenses.
+The Budget Tracking System is a Python application designed to help users record, manage, and monitor their daily expenses. It includes a Streamlit graphical interface as well as a command-line interface.
 
 The application allows users to add, view, search, update, and delete expense records. It also provides spending summaries to help users understand their financial activities.
 
@@ -23,35 +23,35 @@ The project focuses on implementing fundamental Python programming concepts, inc
 - Apply Object-Oriented Programming principles.
 - Validate user inputs and handle errors appropriately.
 - Generate spending summaries based on recorded expenses.
-- Provide a simple and user-friendly command-line interface.
+- Provide a simple and user-friendly graphical interface, with the CLI available as an alternative.
 
 ## 3. Features
 
 ### Core Features
 
-| Feature | Description |
-|---|---|
-| Add Expense | Create an expense record with a unique ID. |
-| View Expenses | Display all recorded expenses. |
-| Search Expenses | Search or filter expenses by category or date. |
-| Update Expense | Modify an existing expense using its ID. |
-| Delete Expense | Delete an expense after user confirmation. |
-| Save and Load | Save expense records to JSON and load them when restarting. |
-| Spending Summary | Display total expenses and spending totals by category. |
+| Feature          | Description                                                 |
+| ---------------- | ----------------------------------------------------------- |
+| Add Expense      | Create an expense record with a unique ID.                  |
+| View Expenses    | Display all recorded expenses.                              |
+| Search Expenses  | Search or filter expenses by category or date.              |
+| Update Expense   | Modify an existing expense using its ID.                    |
+| Delete Expense   | Delete an expense after user confirmation.                  |
+| Save and Load    | Save expense records to JSON and load them when restarting. |
+| Spending Summary | Display total expenses and spending totals by category.     |
 
-**Development status:** Planned. Update this section as features are completed and tested.
+The Streamlit interface provides these features using the existing JSON storage and validation modules.
 
 ## 4. Expense Record Structure
 
 Each expense contains the following information:
 
-| Field | Description | Example |
-|---|---|---|
-| ID | Unique expense identifier | 1 |
-| Date | Date of expense (YYYY-MM-DD) | 2026-11-07 |
-| Category | Expense category | Food |
-| Amount | Amount spent in USD | 5.50 |
-| Note | Short description | Lunch |
+| Field    | Description                  | Example    |
+| -------- | ---------------------------- | ---------- |
+| ID       | Unique expense identifier    | 1          |
+| Date     | Date of expense (YYYY-MM-DD) | 2026-11-07 |
+| Category | Expense category             | Food       |
+| Amount   | Amount spent in USD          | 5.50       |
+| Note     | Short description            | Lunch      |
 
 ### Example JSON Record
 
@@ -60,7 +60,7 @@ Each expense contains the following information:
   "id": 1,
   "date": "2026-11-07",
   "category": "Food",
-  "amount": 5.50,
+  "amount": 5.5,
   "note": "Lunch"
 }
 ```
@@ -69,11 +69,12 @@ Each expense contains the following information:
 
 - **Python 3:** Main programming language.
 - **JSON:** Persistent storage for expense records.
+- **Streamlit:** Browser-based graphical interface.
 - **Python OOP:** Used to organize expense records and management operations.
 - **List/Dictionary:** Used to store and access records in memory.
 - **Git/GitHub:** Recommended for team collaboration and version control.
 
-The application is designed to use Python's standard library without requiring external packages.
+The core expense-management modules use Python's standard library. The graphical interface uses Streamlit.
 
 ## 6. Project Structure
 
@@ -82,6 +83,7 @@ The planned project structure is:
 ```text
 Budget-Tracking-System/
 │
+├── app.py
 ├── main.py
 ├── expense.py
 ├── expense_manager.py
@@ -90,55 +92,63 @@ Budget-Tracking-System/
 ├── summary.py
 │
 ├── expenses.json
+├── requirements.txt
 ├── test_cases.md
 └── README.md
 ```
 
 ### File Descriptions
 
-| File | Responsibility |
-|---|---|
-| `main.py` | Main application and CLI menu |
-| `expense.py` | Expense class and record attributes |
+| File                 | Responsibility                                   |
+| -------------------- | ------------------------------------------------ |
+| `app.py`             | Streamlit graphical application                  |
+| `main.py`            | Command-line application                         |
+| `expense.py`         | Expense class and record attributes              |
 | `expense_manager.py` | Add, view, search, update, and delete operations |
-| `storage.py` | JSON file saving and loading |
-| `validation.py` | Validation of dates, amounts, and other inputs |
-| `summary.py` | Spending calculations and category summaries |
-| `expenses.json` | Stored expense records |
-| `test_cases.md` | Test cases and results |
-| `README.md` | Project documentation |
+| `storage.py`         | JSON file saving and loading                     |
+| `validation.py`      | Validation of dates, amounts, and other inputs   |
+| `summary.py`         | Spending calculations and category summaries     |
+| `expenses.json`      | Stored expense records                           |
+| `requirements.txt`   | Python dependency for the Streamlit GUI          |
+| `test_cases.md`      | Test cases and results                           |
+| `README.md`          | Project documentation                            |
 
 ## 7. Installation and Setup
 
-### Prerequisites  
+### Prerequisites
 
 - Python 3 installed.
 - A terminal or command prompt.
 - A code editor such as Visual Studio Code (optional).
 
-### Running the Application
+### Running the Streamlit GUI
 
-1. Download or clone the project repository.
-2. Open the project folder in a terminal.
-3. Run the following command:
+1. Download or clone the project repository and open its folder in a terminal.
+2. Install the GUI dependency:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+3. Start the graphical application:
+
+```bash
+python -m streamlit run app.py
+```
+
+Streamlit opens the Budget Tracker in your browser. Use the sidebar to navigate between the dashboard, expense list, add form, and edit/delete page. The GUI reads and saves data in `expenses.json`.
+
+### Running the command-line version
+
+To run the original command-line interface instead:
 
 ```bash
 python main.py
 ```
 
-On systems where `python3` is required:
-
-```bash
-python3 main.py
-```
-
-4. Follow the instructions displayed in the command-line menu.
-
-**Note:** These instructions assume the completed application uses `main.py` as its entry point.
-
 ## 8. Application Menu
 
-The planned menu is:
+The command-line menu is:
 
 ```text
 ================================
@@ -209,29 +219,29 @@ Test results will be documented in `test_cases.md`, including the input/action, 
 
 ## 12. Team Members and Contributions
 
-| Member | Name | Responsibility |
-|---|---|---|
+| Member   | Name        | Responsibility                                 |
+| -------- | ----------- | ---------------------------------------------- |
 | Member 1 | [Full Name] | Main application, CLI menu, module integration |
-| Member 2 | [Full Name] | Expense class and CRUD operations |
-| Member 3 | [Full Name] | JSON storage, file handling, input validation |
-| Member 4 | [Full Name] | Spending summaries, testing, documentation |
+| Member 2 | [Full Name] | Expense class and CRUD operations              |
+| Member 3 | [Full Name] | JSON storage, file handling, input validation  |
+| Member 4 | [Full Name] | Spending summaries, testing, documentation     |
 
 All members will participate in final integration, testing, and project demonstration.
 
 ## 13. Development Timeline
 
-| Week | Milestone | Deliverable |
-|---|---|---|
-| Week 1 | Project Proposal | Topic, team roles, record fields, menu design |
-| Week 2 | First Working Version | Add, view, and search expenses |
-| Week 3 | Core Implementation | Update, delete, persistence, summaries, validation |
-| Week 4 | Finalization | Testing, documentation, final application, demonstration |
+| Week   | Milestone             | Deliverable                                              |
+| ------ | --------------------- | -------------------------------------------------------- |
+| Week 1 | Project Proposal      | Topic, team roles, record fields, menu design            |
+| Week 2 | First Working Version | Add, view, and search expenses                           |
+| Week 3 | Core Implementation   | Update, delete, persistence, summaries, validation       |
+| Week 4 | Finalization          | Testing, documentation, final application, demonstration |
 
 ## 14. Known Limitations
 
 The following are planned scope limitations, not confirmed software defects:
 
-- The application uses a command-line interface rather than a graphical interface.
+- The application has a local GUI and CLI, but no multi-user accounts.
 - Expense records are stored locally in a JSON file.
 - The application does not support multiple user accounts.
 - No cloud synchronization is included.
@@ -270,3 +280,4 @@ By implementing Object-Oriented Programming, CRUD operations, JSON file storage,
 **Institution:** American University of Phnom Penh  
 **Project Type:** Final Group Project  
 **Status:** In Development
+**& "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\python.exe" -m streamlit run app.py**
