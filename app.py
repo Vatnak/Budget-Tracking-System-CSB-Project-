@@ -21,17 +21,13 @@ st.set_page_config(page_title="Budget Tracker",
 st.markdown(
     """
     <style>
-    .stApp { background: #f5f7fb; }
-    [data-testid="stHeader"] { background: rgba(245, 247, 251, 0.85); }
-    [data-testid="stSidebar"] { background: #ffffff; }
     [data-testid="stMetric"] {
-        background: #ffffff;
+        background: var(--secondary-background-color);
         border: 1px solid #e7ebf3;
         border-radius: 16px;
         padding: 18px 20px;
         box-shadow: 0 4px 18px rgba(31, 45, 80, 0.04);
     }
-    [data-testid="stMetricLabel"] { color: #64748b; }
     .dashboard-hero {
         background: linear-gradient(120deg, #173b68 0%, #2867a7 58%, #4386bd 100%);
         border-radius: 22px;
