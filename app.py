@@ -13,8 +13,10 @@ from summary import calculate_category_totals, calculate_total_expenses
 
 
 DATA_FILE = Path(__file__).with_name("expenses.json")
+PAGE_ICON = Path(__file__).parent.parent / "10986471.png"
 
-st.set_page_config(page_title="Budget Tracker", page_icon="💸", layout="wide")
+st.set_page_config(page_title="Budget Tracker",
+                   page_icon=str(PAGE_ICON), layout="wide")
 
 st.markdown(
     """
@@ -75,9 +77,11 @@ def load_manager():
     manager = ExpenseManager()
     output = StringIO()
     with redirect_stdout(output):
-        valid_records = all(manager.add_expense(expense) for expense in saved_expenses)
+        valid_records = all(manager.add_expense(expense)
+                            for expense in saved_expenses)
     if not valid_records:
-        st.error(output.getvalue().strip() or "The saved expense data is invalid.")
+        st.error(output.getvalue().strip()
+                 or "The saved expense data is invalid.")
         st.stop()
     return manager
 
@@ -106,7 +110,8 @@ def expense_rows(expenses):
 
 def show_expenses(expenses):
     if expenses:
-        st.dataframe(expense_rows(expenses), use_container_width=True, hide_index=True)
+        st.dataframe(expense_rows(expenses),
+                     use_container_width=True, hide_index=True)
     else:
         st.info("No expenses match these filters.")
 
@@ -123,7 +128,8 @@ def show_dashboard(expenses):
         unsafe_allow_html=True,
     )
 
-    month_options = sorted({expense.date[:7] for expense in expenses}, reverse=True)
+    month_options = sorted({expense.date[:7]
+                           for expense in expenses}, reverse=True)
     control, action = st.columns([3, 1])
     selected_month = control.selectbox(
         "Reporting period",
@@ -163,7 +169,8 @@ def show_dashboard(expenses):
     )
     if categories:
         if chart_type == "Category":
-            ordered_categories = sorted(categories.items(), key=lambda item: item[1], reverse=True)
+            ordered_categories = sorted(
+                categories.items(), key=lambda item: item[1], reverse=True)
             chart_data = {
                 "Category": [category for category, _ in ordered_categories],
                 "Amount (USD)": [float(amount) for _, amount in ordered_categories],
@@ -201,7 +208,8 @@ def show_dashboard(expenses):
         category_column.info("No category totals for this period.")
 
     st.subheader("Recent expenses")
-    recent = sorted(period_expenses, key=lambda expense: expense.date, reverse=True)[:5]
+    recent = sorted(period_expenses,
+                    key=lambda expense: expense.date, reverse=True)[:5]
     show_expenses(recent)
 
 
@@ -210,20 +218,23 @@ def show_add_expense(manager):
     with st.form("add_expense_form", clear_on_submit=True):
         date = st.date_input("Date")
         category = st.text_input("Category", placeholder="e.g. Food")
-        amount = st.number_input("Amount (USD)", min_value=0.01, step=0.01, format="%.2f")
+        amount = st.number_input(
+            "Amount (USD)", min_value=0.01, step=0.01, format="%.2f")
         note = st.text_input("Note", placeholder="What was this expense for?")
         submitted = st.form_submit_button("Add expense", type="primary")
 
     if submitted:
         expense_id = max(manager.expenses, default=0) + 1
-        expense = Expense(expense_id, date.strftime("%Y-%m-%d"), category, amount, note)
+        expense = Expense(expense_id, date.strftime(
+            "%Y-%m-%d"), category, amount, note)
         output = StringIO()
         with redirect_stdout(output):
             added = manager.add_expense(expense)
         if not added:
-            st.error(output.getvalue().strip() or "Please check the expense details.")
+            st.error(output.getvalue().strip()
+                     or "Please check the expense details.")
         elif save_manager(manager):
-            st.success("Expense added.")
+            st.session_state["success_message"] = "Expense added successfully."
             st.rerun()
 
 
@@ -235,14 +246,17 @@ def show_expenses_page(expenses):
     first, second = st.columns([2, 1])
     category = first.selectbox("Filter by category", category_options)
     filter_by_date = second.checkbox("Filter by date")
-    selected_date = st.date_input("Date", key="expense_filter_date") if filter_by_date else None
+    selected_date = st.date_input(
+        "Date", key="expense_filter_date") if filter_by_date else None
 
     filtered = expenses
     if category != "All categories":
-        filtered = [expense for expense in filtered if expense.category == category]
+        filtered = [
+            expense for expense in filtered if expense.category == category]
     if selected_date is not None:
         date_text = selected_date.strftime("%Y-%m-%d")
-        filtered = [expense for expense in filtered if expense.date == date_text]
+        filtered = [
+            expense for expense in filtered if expense.date == date_text]
     show_expenses(filtered)
 
 
@@ -288,20 +302,22 @@ def show_manage_expenses(manager):
                 note=note,
             )
         if not updated:
-            st.error(output.getvalue().strip() or "Please check the expense details.")
+            st.error(output.getvalue().strip()
+                     or "Please check the expense details.")
         elif save_manager(manager):
-            st.success("Expense updated.")
+            st.session_state["success_message"] = "Expense updated successfully."
             st.rerun()
 
     st.subheader("Delete expense")
     with st.form(f"delete_expense_{selected.expense_id}"):
-        confirmed = st.checkbox("I understand this expense will be permanently deleted.")
+        confirmed = st.checkbox(
+            "I understand this expense will be permanently deleted.")
         delete_submitted = st.form_submit_button("Delete expense")
     if delete_submitted:
         if not confirmed:
             st.warning("Confirm the deletion before continuing.")
         elif manager.delete_expense(selected.expense_id) and save_manager(manager):
-            st.success("Expense deleted.")
+            st.session_state["success_message"] = "Expense deleted successfully."
             st.rerun()
 
 
@@ -316,6 +332,10 @@ with st.sidebar:
         label_visibility="collapsed",
         key="page_nav",
     )
+
+success_message = st.session_state.pop("success_message", None)
+if success_message:
+    st.success(success_message)
 
 if page == "Dashboard":
     show_dashboard(expenses)

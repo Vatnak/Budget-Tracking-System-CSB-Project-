@@ -1,16 +1,44 @@
 [
     {
-        "id": 1,
-        "date": "2026-11-19",
-        "category": "Cloth",
-        "amount": 20.0,
-        "note": "New cloth"
-    },
-    {
         "id": 2,
         "date": "2026-12-23",
         "category": "Movie",
         "amount": 12.0,
         "note": "Doomsday ticket"
+    },
+    {
+        "id": 3,
+        "date": "2026-11-20",
+        "category": "food",
+        "amount": 100.0,
+        "note": "eat"
+    },
+    {
+        "id": 4,
+        "date": "2026-11-20",
+        "category": "New",
+        "amount": 0.01,
+        "note": "hhjf"
+    },
+    {
+        "id": 5,
+        "date": "2026-11-20",
+        "category": "Dinner",
+        "amount": 20.0,
+        "note": "Family dinner"
+    },
+    {
+        "id": 6,
+        "date": "2026-11-20",
+        "category": "111",
+        "amount": 0.01,
+        "note": "111"
+    },
+    {
+        "id": 7,
+        "date": "2026-11-12",
+        "category": "csvdsfd",
+        "amount": 0.1,
+        "note": "dsjfbasdlfhwer"
     }
 ]
