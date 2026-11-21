@@ -1,44 +1,14 @@
 [
-    {
-        "id": 2,
-        "date": "2026-12-23",
-        "category": "Movie",
-        "amount": 12.0,
-        "note": "Doomsday ticket"
-    },
-    {
-        "id": 3,
-        "date": "2026-11-20",
-        "category": "food",
-        "amount": 100.0,
-        "note": "eat"
-    },
-    {
-        "id": 4,
-        "date": "2026-11-20",
-        "category": "New",
-        "amount": 0.01,
-        "note": "hhjf"
-    },
-    {
-        "id": 5,
-        "date": "2026-11-20",
-        "category": "Dinner",
-        "amount": 20.0,
-        "note": "Family dinner"
-    },
-    {
-        "id": 6,
-        "date": "2026-11-20",
-        "category": "111",
-        "amount": 0.01,
-        "note": "111"
-    },
-    {
-        "id": 7,
-        "date": "2026-11-12",
-        "category": "csvdsfd",
-        "amount": 0.1,
-        "note": "dsjfbasdlfhwer"
-    }
+    {"id": 1, "date": "2026-11-02", "category": "Food", "amount": 4.5, "note": "Breakfast noodle soup"},
+    {"id": 2, "date": "2026-11-03", "category": "Transport", "amount": 2.0, "note": "Tuk-tuk to campus"},
+    {"id": 3, "date": "2026-11-04", "category": "Books", "amount": 18.75, "note": "Python programming textbook"},
+    {"id": 4, "date": "2026-11-05", "category": "Food", "amount": 6.25, "note": "Lunch with classmates"},
+    {"id": 5, "date": "2026-11-07", "category": "Utilities", "amount": 25.0, "note": "Monthly internet bill"},
+    {"id": 6, "date": "2026-11-08", "category": "Entertainment", "amount": 7.5, "note": "Movie ticket"},
+    {"id": 7, "date": "2026-11-10", "category": "Transport", "amount": 15.0, "note": "Motorbike fuel"},
+    {"id": 8, "date": "2026-11-12", "category": "Health", "amount": 9.8, "note": "Pharmacy - cold medicine"},
+    {"id": 9, "date": "2026-11-14", "category": "Food", "amount": 32.0, "note": "Weekly groceries"},
+    {"id": 10, "date": "2026-11-16", "category": "Shopping", "amount": 21.5, "note": "New backpack"},
+    {"id": 11, "date": "2026-11-18", "category": "Utilities", "amount": 3.0, "note": "Phone top-up"},
+    {"id": 12, "date": "2026-11-20", "category": "Entertainment", "amount": 12.0, "note": "Concert ticket"}
 ]

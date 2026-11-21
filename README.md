@@ -5,7 +5,7 @@
 **Programming Language:** Python  
 **Application Type:** Streamlit web GUI and command-line interface (CLI)  
 **Data Storage:** JSON  
-**Team:** [Team Number]
+**Team:** Team 6
 
 ## 1. Project Overview
 
@@ -78,11 +78,16 @@ The core expense-management modules use Python's standard library. The graphical
 
 ## 6. Project Structure
 
-The planned project structure is:
+The project structure is:
 
 ```text
 Budget-Tracking-System/
 │
+├── .streamlit/
+│   └── config.toml
+├── tests/
+│   ├── test_expense_manager.py
+│   └── test_validation.py
 ├── app.py
 ├── main.py
 ├── expense.py
@@ -110,6 +115,8 @@ Budget-Tracking-System/
 | `summary.py`         | Spending calculations and category summaries     |
 | `expenses.json`      | Stored expense records                           |
 | `requirements.txt`   | Python dependency for the Streamlit GUI          |
+| `.streamlit/config.toml` | Streamlit light theme settings               |
+| `tests/`             | Automated unit tests                             |
 | `test_cases.md`      | Test cases and results                           |
 | `README.md`          | Project documentation                            |
 
@@ -200,9 +207,9 @@ Validation rules include:
 
 ## 11. Testing
 
-Testing will verify that the required application features function correctly.
+Testing verified that the required application features work correctly. The team documented 15 manual test checks and 6 automated unit tests. All tests passed.
 
-The team will document at least eight test checks, including:
+The manual checks include:
 
 1. Adding a valid expense.
 2. Rejecting an empty required field.
@@ -213,20 +220,36 @@ The team will document at least eight test checks, including:
 7. Restarting the application and verifying saved records.
 8. Starting the application with a missing data file.
 
-Additional checks will verify the accuracy of spending summary calculations.
+Additional checks verified invalid dates, unknown IDs, damaged JSON files, invalid menu choices, and the accuracy of the spending summary.
 
-Test results will be documented in `test_cases.md`, including the input/action, expected result, actual result, and pass/fail status.
+The full testing table is in [`test_cases.md`](test_cases.md). It lists the input/action, expected result, actual result, and pass/fail status for each test.
+
+To run the automated unit tests:
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 ## 12. Team Members and Contributions
 
-| Member   | Name        | Responsibility                                 |
-| -------- | ----------- | ---------------------------------------------- |
-| Member 1 | [Full Name] | Main application, CLI menu, module integration |
-| Member 2 | [Full Name] | Expense class and CRUD operations              |
-| Member 3 | [Full Name] | JSON storage, file handling, input validation  |
-| Member 4 | [Full Name] | Spending summaries, testing, documentation     |
+| Member   | Name             | Role                         | Responsibility                                                      |
+| -------- | ---------------- | ---------------------------- | ------------------------------------------------------------------- |
+| Member 1 | Taing Tumvatanak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
+| Member 2 | Mao Sereyvatanak | Validation                   | Input validation functions and validation tests                     |
+| Member 3 | Houn Viriyaputta | User interface               | Streamlit graphical interface                                       |
+| Member 4 | Art Oudom        | Testing and refinement       | Testing, test documentation, UI refinement, final README            |
 
-All members will participate in final integration, testing, and project demonstration.
+### Contribution Statements
+
+**Taing Tumvatanak (Orchestrator):** Handled the whole project pipeline. Created the repository and the file structure, and planned how the modules connect. Built the `Expense` class and the add, view, search, update, and delete operations in `expense_manager.py`. Wrote the command-line menu in `main.py`, the JSON save and load functions in `storage.py`, and the spending summaries. Integrated the validation and GUI work into the main branch, and changed the expense storage to a dictionary keyed by ID for faster lookups.
+
+**Mao Sereyvatanak (Validation):** Wrote the input validation functions in `validation.py` for expense IDs, dates, categories, amounts, and notes. Wrote the validation test cases, and updated `.gitignore` to exclude Python cache files.
+
+**Houn Viriyaputta (User interface):** Built the Streamlit graphical interface in `app.py`, including the dashboard, the expense list, the add form, and the edit/delete page. Connected the GUI to the existing storage and validation modules.
+
+**Art Oudom (Testing and refinement):** Tested all application features and documented 15 manual tests and 6 unit tests in `test_cases.md`. Prepared the sample data file. Refined the GUI with a light theme, boxed sidebar navigation, and a pie chart for spending, and finalized the README.
+
+All members participated in final integration, testing, and the project demonstration.
 
 ## 13. Development Timeline
 
@@ -248,23 +271,26 @@ The following are planned scope limitations, not confirmed software defects:
 - No external database is required.
 - Advanced financial analysis and automatic bank integration are outside the project scope.
 
-Additional known bugs or limitations should be documented here after testing.
+Limitations found during testing:
+
+- Category search is case-sensitive. Searching for `food` does not find records saved as `Food`.
+- In the CLI, an empty category or an invalid date is reported only after all fields have been entered.
 
 ## 15. Final Submission
 
-The final project submission will include:
+The final project submission includes:
 
-- Complete Python source code.
-- A sample JSON file containing at least 10 fictional expense records.
-- This README file with finalized team information.
-- A testing table showing expected and actual results.
-- A brief contribution statement for each team member.
+| Requirement | Location | Status |
+| ----------- | -------- | ------ |
+| Complete Python source code | `app.py`, `main.py`, `expense.py`, `expense_manager.py`, `storage.py`, `validation.py`, `summary.py`, `tests/` | Complete |
+| Sample JSON file with at least 10 fictional expense records | `expenses.json` (12 records) | Complete |
+| README with finalized team information | This file, section 12 | Complete |
+| Testing table with expected and actual results | `test_cases.md` (15 manual tests, 6 unit tests) | Complete |
+| Brief contribution statement for each team member | Section 12, "Contribution Statements" | Complete |
 
 All files will be packaged into one ZIP file:
 
-`COSC221_TeamName_FinalProject.zip`
-
-Replace `TeamName` with the registered team number.
+`COSC221_Team6_FinalProject.zip`
 
 The team will present a **5–7 minute live demonstration**, followed by individual questions from the instructor.
 
@@ -279,5 +305,4 @@ By implementing Object-Oriented Programming, CRUD operations, JSON file storage,
 **Course:** COSC221  
 **Institution:** American University of Phnom Penh  
 **Project Type:** Final Group Project  
-**Status:** In Development
-**& "C:\Users\ASUS\AppData\Local\Programs\Python\Python313\python.exe" -m streamlit run app.py**
+**Status:** Completed
