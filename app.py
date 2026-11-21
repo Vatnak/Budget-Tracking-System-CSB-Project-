@@ -159,31 +159,79 @@ def show_expenses(expenses):
 
 
 def show_pie_chart(container, chart_data, label_field):
+    total = sum(chart_data["Amount (USD)"])
     rows = [
-        {label_field: label, "Amount (USD)": amount}
+        {
+            label_field: label,
+            "Amount (USD)": amount,
+            "Share": amount / total,
+            "Slice label": f"${amount:,.2f}\n{amount / total:.1%}",
+            "Legend label": f"{label} · ${amount:,.2f} ({amount / total:.1%})",
+        }
         for label, amount in zip(chart_data[label_field], chart_data["Amount (USD)"])
     ]
     container.vega_lite_chart(
         {
             "data": {"values": rows},
-            "mark": {"type": "arc", "innerRadius": 60, "stroke": "#ffffff"},
+            # Keep the plotting height intact; the legend needs extra space below it.
+            "autosize": {"type": "fit-x", "contains": "padding"},
             "encoding": {
                 "theta": {"field": "Amount (USD)", "type": "quantitative", "stack": True},
                 "color": {
-                    "field": label_field,
+                    "field": "Legend label",
                     "type": "nominal",
                     "sort": None,
-                    "legend": {"title": label_field, "orient": "right"},
+                    "scale": {"scheme": "tableau10"},
+                    "legend": {
+                        "title": label_field,
+                        "orient": "bottom",
+                        "columns": 2,
+                        "labelLimit": 320,
+                        "labelColor": "#374151",
+                        "labelFontSize": 12,
+                        "rowPadding": 8,
+                        "offset": 16,
+                    },
                 },
                 "order": {"field": "Amount (USD)", "type": "quantitative", "sort": "descending"},
                 "tooltip": [
                     {"field": label_field, "type": "nominal"},
                     {"field": "Amount (USD)", "type": "quantitative", "format": "$,.2f"},
+                    {"field": "Share", "type": "quantitative", "format": ".1%"},
                 ],
             },
-            "height": 320,
+            "layer": [
+                {
+                    "mark": {
+                        "type": "arc", "innerRadius": 65,
+                        "outerRadius": 150, "stroke": "#ffffff",
+                        "strokeWidth": 2,
+                    },
+                },
+                {
+                    "mark": {
+                        "type": "text", "radius": 110,
+                        "fontSize": 12, "fontWeight": "bold",
+                        "lineBreak": "\n", "lineHeight": 15,
+                        "fill": "#ffffff", "stroke": "#111827",
+                        "strokeWidth": 0.3,
+                    },
+                    "encoding": {
+                        "text": {"field": "Slice label", "type": "nominal"},
+                        "opacity": {
+                            "condition": {"test": "datum.Share >= 0.05", "value": 1},
+                            "value": 0,
+                        },
+                    },
+                },
+            ],
+            "height": 340,
         },
         use_container_width=True,
+    )
+    container.caption(
+        "Slices show amount and percentage. Small slices are listed in the legend "
+        "to keep labels readable. Hover over any slice for details."
     )
 
 
