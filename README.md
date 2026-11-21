@@ -145,6 +145,10 @@ python -m streamlit run app.py
 
 Streamlit opens the Budget Tracker in your browser. Use the sidebar to navigate between the dashboard, expense list, add form, and edit/delete page. The GUI reads and saves data in `expenses.json`.
 
+If PowerShell reports that `streamlit` is not recognized, use the `python -m streamlit run app.py` command above. It runs Streamlit through Python without requiring the Streamlit shortcut on PATH. If the browser does not open automatically, visit http://localhost:8501. Press `Ctrl+C` in the terminal to stop the app.
+
+Keep the `.streamlit/config.toml` file when sharing or cloning the project. It defines the app's light theme so text, controls, and charts use matching colors across computers. Run the command from the project folder so Streamlit loads this configuration. After updating the theme configuration, restart Streamlit and refresh the browser.
+
 ### Running the command-line version
 
 To run the original command-line interface instead:
