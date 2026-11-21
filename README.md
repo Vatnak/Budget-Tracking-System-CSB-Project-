@@ -239,7 +239,7 @@ python -m unittest discover -s tests -v
 | Member   | Name             | Role                         | Responsibility                                                      |
 | -------- | ---------------- | ---------------------------- | ------------------------------------------------------------------- |
 | Member 1 | Taing Tumvatanak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
-| Member 2 | Mao Sereyvatanak | Validation                   | Input validation functions and validation tests                     |
+| Member 2 |Mao Serey Vortanak| Validation                   | Input validation functions and validation tests                     |
 | Member 3 | Houn Viriyaputta | User interface               | Streamlit graphical interface                                       |
 | Member 4 | Art Oudom        | Testing and refinement       | Testing, test documentation, UI refinement, final README            |
 
