@@ -21,41 +21,87 @@ st.set_page_config(page_title="Budget Tracker",
 st.markdown(
     """
     <style>
-    [data-testid="stMetric"] {
-        background: var(--secondary-background-color);
-        border: 1px solid #e7ebf3;
-        border-radius: 16px;
-        padding: 18px 20px;
-        box-shadow: 0 4px 18px rgba(31, 45, 80, 0.04);
+    .stApp { background: #f5f7fb; }
+    [data-testid="stHeader"] { background: rgba(245, 247, 251, 0.85); }
+    [data-testid="stSidebar"] {
+        background: #ffffff;
+        border-right: 1px solid #e5e7eb;
     }
-    .dashboard-hero {
-        background: linear-gradient(120deg, #173b68 0%, #2867a7 58%, #4386bd 100%);
-        border-radius: 22px;
-        padding: 30px 34px;
-        color: white;
-        margin: 0 0 22px 0;
-        box-shadow: 0 12px 30px rgba(30, 75, 125, 0.16);
+    [data-testid="stSidebar"] [data-testid="stRadio"],
+    [data-testid="stSidebar"] [data-testid="stRadio"] > div,
+    [data-testid="stSidebar"] [role="radiogroup"] {
+        width: 100%;
     }
-    .dashboard-hero .eyebrow {
-        color: #c8e3ff;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        margin: 0 0 8px 0;
-        text-transform: uppercase;
+    [data-testid="stSidebar"] [role="radiogroup"] {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
     }
-    .dashboard-hero h1 {
-        color: white;
-        font-size: 2rem;
-        margin: 0 0 7px 0;
-    }
-    .dashboard-hero p:last-child {
-        color: #e2efff;
+    [data-testid="stSidebar"] [role="radiogroup"] label {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 14px;
         margin: 0;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
     }
-    div.stButton > button[kind="primary"] {
-        border-radius: 10px;
+    [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+        background: #eef2ff;
+        border-color: #c7d2fe;
+    }
+    [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
+        background: #2563eb;
+        border-color: #2563eb;
+    }
+    [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) p {
+        color: #ffffff;
         font-weight: 600;
+    }
+    [data-testid="stSidebar"] [role="radiogroup"] label > div:not(:has([data-testid="stMarkdownContainer"])) {
+        display: none !important;
+    }
+    [data-testid="stSidebar"] [role="radiogroup"] label > div {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    [data-testid="stMetric"],
+    [class*="st-key-box-"] {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        box-shadow: none;
+    }
+    [data-testid="stMetric"] {
+        padding: 16px 18px;
+    }
+    [data-testid="stMetricLabel"] p {
+        color: #6b7280;
+        font-size: 0.85rem;
+    }
+    .page-header h1 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+    }
+    .page-header p {
+        color: #6b7280;
+        margin: 4px 0 16px 0;
+    }
+    .box-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+    }
+    div.stButton > button {
+        border-radius: 6px;
     }
     </style>
     """,
@@ -112,23 +158,47 @@ def show_expenses(expenses):
         st.info("No expenses match these filters.")
 
 
+def show_pie_chart(container, chart_data, label_field):
+    rows = [
+        {label_field: label, "Amount (USD)": amount}
+        for label, amount in zip(chart_data[label_field], chart_data["Amount (USD)"])
+    ]
+    container.vega_lite_chart(
+        {
+            "data": {"values": rows},
+            "mark": {"type": "arc", "innerRadius": 60, "stroke": "#ffffff"},
+            "encoding": {
+                "theta": {"field": "Amount (USD)", "type": "quantitative", "stack": True},
+                "color": {
+                    "field": label_field,
+                    "type": "nominal",
+                    "sort": None,
+                    "legend": {"title": label_field, "orient": "right"},
+                },
+                "order": {"field": "Amount (USD)", "type": "quantitative", "sort": "descending"},
+                "tooltip": [
+                    {"field": label_field, "type": "nominal"},
+                    {"field": "Amount (USD)", "type": "quantitative", "format": "$,.2f"},
+                ],
+            },
+            "height": 320,
+        },
+        use_container_width=True,
+    )
+
+
 def show_dashboard(expenses):
     st.markdown(
-        """
-        <div class="dashboard-hero">
-            <p class="eyebrow">Personal finance overview</p>
-            <h1>Your money, in focus.</h1>
-            <p>Track spending, spot patterns, and stay on top of your budget.</p>
-        </div>
-        """,
+        '<div class="page-header"><h1>Dashboard</h1>'
+        "<p>Spending summary for the selected period.</p></div>",
         unsafe_allow_html=True,
     )
 
     month_options = sorted({expense.date[:7]
                            for expense in expenses}, reverse=True)
-    control, action = st.columns([3, 1])
+    control, _, action = st.columns([2, 2, 1], vertical_alignment="bottom")
     selected_month = control.selectbox(
-        "Reporting period",
+        "Period",
         ["All time"] + month_options,
         format_func=lambda value: (
             value if value == "All time"
@@ -136,7 +206,7 @@ def show_dashboard(expenses):
         ),
     )
     action.button(
-        "＋ Add an expense",
+        "Add expense",
         type="primary",
         use_container_width=True,
         on_click=lambda: st.session_state.update({"page_nav": "Add expense"}),
@@ -151,18 +221,22 @@ def show_dashboard(expenses):
     total = calculate_total_expenses(period_expenses)
     categories = calculate_category_totals(period_expenses)
     first, second, third = st.columns(3)
-    first.metric("Total spending", f"${total:,.2f}")
-    second.metric("Expenses recorded", len(period_expenses))
+    first.metric("Total spent", f"${total:,.2f}")
+    second.metric("Expenses", len(period_expenses))
     third.metric("Categories", len(categories))
 
-    chart_column, category_column = st.columns([1.6, 1])
-    chart_column.subheader("Spending overview")
-    chart_type = chart_column.radio(
+    chart_area, category_area = st.columns([1.6, 1])
+    chart_column = chart_area.container(border=True, key="box-chart")
+    category_column = category_area.container(border=True, key="box-categories")
+
+    title, toggle = chart_column.columns([1, 1], vertical_alignment="center")
+    title.markdown('<p class="box-title">Spending</p>', unsafe_allow_html=True)
+    chart_type = toggle.segmented_control(
         "Break down spending by",
         ["Category", "Day"],
-        horizontal=True,
+        default="Category",
         label_visibility="collapsed",
-    )
+    ) or "Category"
     if categories:
         if chart_type == "Category":
             ordered_categories = sorted(
@@ -171,7 +245,7 @@ def show_dashboard(expenses):
                 "Category": [category for category, _ in ordered_categories],
                 "Amount (USD)": [float(amount) for _, amount in ordered_categories],
             }
-            chart_column.bar_chart(chart_data, x="Category", y="Amount (USD)")
+            show_pie_chart(chart_column, chart_data, "Category")
         else:
             daily_totals = {}
             for expense in period_expenses:
@@ -185,11 +259,12 @@ def show_dashboard(expenses):
                     float(daily_totals[day]) for day in sorted(daily_totals)
                 ],
             }
-            chart_column.bar_chart(chart_data, x="Date", y="Amount (USD)")
+            show_pie_chart(chart_column, chart_data, "Date")
     else:
         chart_column.info("Add an expense to see your spending overview.")
 
-    category_column.subheader("Category totals")
+    category_column.markdown(
+        '<p class="box-title">By category</p>', unsafe_allow_html=True)
     if categories:
         category_rows = [
             {"Category": category, "Amount (USD)": f"${amount:,.2f}"}
@@ -203,10 +278,13 @@ def show_dashboard(expenses):
     else:
         category_column.info("No category totals for this period.")
 
-    st.subheader("Recent expenses")
+    recent_box = st.container(border=True, key="box-recent")
+    recent_box.markdown(
+        '<p class="box-title">Recent expenses</p>', unsafe_allow_html=True)
     recent = sorted(period_expenses,
                     key=lambda expense: expense.date, reverse=True)[:5]
-    show_expenses(recent)
+    with recent_box:
+        show_expenses(recent)
 
 
 def show_add_expense(manager):
@@ -321,7 +399,7 @@ manager = load_manager()
 expenses = manager.view_expense()
 
 with st.sidebar:
-    st.title("💸 Budget Tracker")
+    st.markdown("### Budget Tracker")
     page = st.radio(
         "Navigation",
         ["Dashboard", "Expenses", "Add expense", "Edit / delete"],
