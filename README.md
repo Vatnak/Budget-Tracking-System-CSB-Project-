@@ -247,7 +247,7 @@ python -m unittest discover -s tests -v
 
 **Taing Tumvatanak (Orchestrator):** Handled the whole project pipeline. Created the repository and the file structure, and planned how the modules connect. Built the `Expense` class and the add, view, search, update, and delete operations in `expense_manager.py`. Wrote the command-line menu in `main.py`, the JSON save and load functions in `storage.py`, and the spending summaries. Integrated the validation and GUI work into the main branch, and changed the expense storage to a dictionary keyed by ID for faster lookups.
 
-**Mao Sereyvatanak (Validation):** Wrote the input validation functions in `validation.py` for expense IDs, dates, categories, amounts, and notes. Wrote the validation test cases, and updated `.gitignore` to exclude Python cache files.
+**Mao Sereyvortanak (Validation):** Wrote the input validation functions in `validation.py` for expense IDs, dates, categories, amounts, and notes. Wrote the validation test cases, and updated `.gitignore` to exclude Python cache files.
 
 **Houn Viriyaputta (User interface):** Built the Streamlit graphical interface in `app.py`, including the dashboard, the expense list, the add form, and the edit/delete page. Connected the GUI to the existing storage and validation modules.
 
