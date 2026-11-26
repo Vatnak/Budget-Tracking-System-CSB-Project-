@@ -238,14 +238,14 @@ python -m unittest discover -s tests -v
 
 | Member   | Name             | Role                         | Responsibility                                                      |
 | -------- | ---------------- | ---------------------------- | ------------------------------------------------------------------- |
-| Member 1 | Taing Tumvatanak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
+| Member 1 | Taing Tunvatnak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
 | Member 2 | Mao Sereyvortanak| Validation                   | Input validation functions and validation tests                     |
 | Member 3 | Houn Viriyaputta | User interface               | Streamlit graphical interface                                       |
 | Member 4 | Art Oudom        | Testing and refinement       | Testing, test documentation, UI refinement, final README            |
 
 ### Contribution Statements
 
-**Taing Tumvatanak (Orchestrator):** Handled the whole project pipeline. Created the repository and the file structure, and planned how the modules connect. Built the `Expense` class and the add, view, search, update, and delete operations in `expense_manager.py`. Wrote the command-line menu in `main.py`, the JSON save and load functions in `storage.py`, and the spending summaries. Integrated the validation and GUI work into the main branch, and changed the expense storage to a dictionary keyed by ID for faster lookups.
+**Taing Tunvatnak (Orchestrator):** Handled the whole project pipeline. Created the repository and the file structure, and planned how the modules connect. Built the `Expense` class and the add, view, search, update, and delete operations in `expense_manager.py`. Wrote the command-line menu in `main.py`, the JSON save and load functions in `storage.py`, and the spending summaries. Integrated the validation and GUI work into the main branch, and changed the expense storage to a dictionary keyed by ID for faster lookups.
 
 **Mao Sereyvortanak (Validation):** Wrote the input validation functions in `validation.py` for expense IDs, dates, categories, amounts, and notes. Wrote the validation test cases, and updated `.gitignore` to exclude Python cache files.
 
