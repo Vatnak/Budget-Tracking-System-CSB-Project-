@@ -15,7 +15,7 @@
 | 4  | Reject an invalid date format | Menu `1`; date `21-11-2026` | Error message; the expense is not saved | "Invalid Date: Please enter a valid date in the format YYYY-MM-DD." File still holds 12 records | Pass |
 | 5  | Search for existing records | Menu `3`; category `Food` | All Food expenses are listed | IDs 1, 4 and 9 are listed | Pass |
 | 6  | Search for a record that does not exist | Menu `3`; category `Travel` | "No expenses found." | "No expenses found." | Pass |
-| 7  | Update an existing expense | Menu `4`; ID `2`, amount `3.00`, note `Tuk-tuk ride`; leave the other fields blank | Only the changed fields are updated, and the change is saved | "Changes saved successfully." | Pass |
+| 7  | Update an existing expense | Menu `4`; ID `2`, amount `3.00`, note `Tuk-tuk ride`; leave the other fields blank | Only the changed fields are updated, and the change is saved | "Changes saved successfully." Searching by date `2026-11-03` then shows `2 \| 2026-11-03 \| Transport \| $3.00 \| Tuk-tuk ride` | Pass |
 | 8  | Update an unknown ID | Menu `4`; ID `99` | Handled without a crash | "Expense ID not found." | Pass |
 | 9  | Cancel a deletion | Menu `5`; ID `12`, answer `no` | The record is kept | "Deletion cancelled." File still holds 12 records | Pass |
 | 10 | Confirm a deletion | Menu `5`; ID `12`, answer `yes` | The record is removed and the change is saved | "Changes saved successfully." File holds 11 records | Pass |

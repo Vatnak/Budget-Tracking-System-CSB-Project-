@@ -71,8 +71,9 @@ Each expense contains the following information:
 - **JSON:** Persistent storage for expense records.
 - **Streamlit:** Browser-based graphical interface.
 - **Python OOP:** Used to organize expense records and management operations.
-- **List/Dictionary:** Used to store and access records in memory.
-- **Git/GitHub:** Recommended for team collaboration and version control.
+- **Dictionary:** Records are stored in a dictionary keyed by expense ID. This gives fast lookup, update, and delete by ID, and prevents duplicate IDs.
+- **List:** Used when records are displayed, searched, and saved to JSON.
+- **Git/GitHub:** Used for team collaboration and version control.
 
 The core expense-management modules use Python's standard library. The graphical interface uses Streamlit.
 
@@ -197,7 +198,7 @@ The application is designed to handle:
 
 ## 10. Input Validation and Error Handling
 
-The application validate user inputs to ensure data accuracy.
+The application validates user inputs to ensure data accuracy.
 
 Validation rules include:
 
@@ -234,12 +235,14 @@ To run the automated unit tests:
 python -m unittest discover -s tests -v
 ```
 
+`tests/test_validation.py` holds manual print checks for the validation functions. They are commented out, so `unittest` does not run them.
+
 ## 12. Team Members and Contributions
 
 | Member   | Name             | Role                         | Responsibility                                                      |
 | -------- | ---------------- | ---------------------------- | ------------------------------------------------------------------- |
-| Member 1 | Taing Tunvatnak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
-| Member 2 | Mao Sereyvortanak| Validation                   | Input validation functions and validation tests                     |
+| Member 1 | Taing Tunvatnak  | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
+| Member 2 | Mao Sereyvortanak | Validation                   | Input validation functions and validation tests                     |
 | Member 3 | Houn Viriyaputta | User interface               | Streamlit graphical interface                                       |
 | Member 4 | Art Oudom        | Testing and refinement       | Testing, test documentation, UI refinement, final README            |
 
