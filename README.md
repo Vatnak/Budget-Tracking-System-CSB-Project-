@@ -104,21 +104,21 @@ Budget-Tracking-System/
 
 ### File Descriptions
 
-| File                 | Responsibility                                   |
-| -------------------- | ------------------------------------------------ |
-| `app.py`             | Streamlit graphical application                  |
-| `main.py`            | Command-line application                         |
-| `expense.py`         | Expense class and record attributes              |
-| `expense_manager.py` | Add, view, search, update, and delete operations |
-| `storage.py`         | JSON file saving and loading                     |
-| `validation.py`      | Validation of dates, amounts, and other inputs   |
-| `summary.py`         | Spending calculations and category summaries     |
-| `expenses.json`      | Stored expense records                           |
-| `requirements.txt`   | Python dependency for the Streamlit GUI          |
-| `.streamlit/config.toml` | Streamlit light theme settings               |
-| `tests/`             | Automated unit tests                             |
-| `test_cases.md`      | Test cases and results                           |
-| `README.md`          | Project documentation                            |
+| File                     | Responsibility                                   |
+| ------------------------ | ------------------------------------------------ |
+| `app.py`                 | Streamlit graphical application                  |
+| `main.py`                | Command-line application                         |
+| `expense.py`             | Expense class and record attributes              |
+| `expense_manager.py`     | Add, view, search, update, and delete operations |
+| `storage.py`             | JSON file saving and loading                     |
+| `validation.py`          | Validation of dates, amounts, and other inputs   |
+| `summary.py`             | Spending calculations and category summaries     |
+| `expenses.json`          | Stored expense records                           |
+| `requirements.txt`       | Python dependency for the Streamlit GUI          |
+| `.streamlit/config.toml` | Streamlit light theme settings                   |
+| `tests/`                 | Automated unit tests                             |
+| `test_cases.md`          | Test cases and results                           |
+| `README.md`              | Project documentation                            |
 
 ## 7. Installation and Setup
 
@@ -197,7 +197,7 @@ The application is designed to handle:
 
 ## 10. Input Validation and Error Handling
 
-The application will validate user inputs to ensure data accuracy.
+The application validate user inputs to ensure data accuracy.
 
 Validation rules include:
 
@@ -239,7 +239,7 @@ python -m unittest discover -s tests -v
 | Member   | Name             | Role                         | Responsibility                                                      |
 | -------- | ---------------- | ---------------------------- | ------------------------------------------------------------------- |
 | Member 1 | Taing Tumvatanak | Orchestrator                 | Whole pipeline: project setup, CRUD operations, CLI, JSON storage, integration |
-| Member 2 |Mao Serey Vortanak| Validation                   | Input validation functions and validation tests                     |
+| Member 2 | Mao Sereyvortanak| Validation                   | Input validation functions and validation tests                     |
 | Member 3 | Houn Viriyaputta | User interface               | Streamlit graphical interface                                       |
 | Member 4 | Art Oudom        | Testing and refinement       | Testing, test documentation, UI refinement, final README            |
 
@@ -268,7 +268,7 @@ All members participated in final integration, testing, and the project demonstr
 
 The following are planned scope limitations, not confirmed software defects:
 
-- The application has a local GUI and CLI, but no multi-user accounts.
+- The application has a local GUI and CLI.
 - Expense records are stored locally in a JSON file.
 - The application does not support multiple user accounts.
 - No cloud synchronization is included.
@@ -292,7 +292,7 @@ The final project submission includes:
 | Testing table with expected and actual results | `test_cases.md` (15 manual tests, 6 unit tests) | Complete |
 | Brief contribution statement for each team member | Section 12, "Contribution Statements" | Complete |
 
-All files will be packaged into one ZIP file:
+All project files will be packaged into one ZIP file:
 
 `COSC221_Team6_FinalProject.zip`
 
